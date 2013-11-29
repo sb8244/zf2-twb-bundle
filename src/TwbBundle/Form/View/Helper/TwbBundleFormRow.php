@@ -6,7 +6,7 @@ class TwbBundleFormRow extends \Zend\Form\View\Helper\FormRow
     /**
      * @var string
      */
-    private static $formGroupFormat = '<div class="form-group %s">%s</div>';
+    private static $formGroupFormat = '<div class="control-group %s">%s</div>';
 
     /**
      * @var string
@@ -31,12 +31,12 @@ class TwbBundleFormRow extends \Zend\Form\View\Helper\FormRow
      */
     public function render(\Zend\Form\ElementInterface $oElement)
     {
-    	$sElementType = $oElement->getAttribute('type');
+        $sElementType = $oElement->getAttribute('type');
 
-    	//Nothing to do for hidden elements which have no messages
-    	if( $sElementType === 'hidden' && !$oElement->getMessages()) {
-    		return parent::render($oElement);
-    	}
+        //Nothing to do for hidden elements which have no messages
+        if( $sElementType === 'hidden' && !$oElement->getMessages()) {
+            return parent::render($oElement);
+        }
 
         //Retrieve expected layout
         $sLayout = $oElement->getOption('twb-layout');
@@ -57,13 +57,13 @@ class TwbBundleFormRow extends \Zend\Form\View\Helper\FormRow
 
         //"has-error" validation state case
         if (count($oElement->getMessages())){
-        	$sRowClass .= ' has-error';
-        	//Element have errors
-        	if ($sInputErrorClass = $this->getInputErrorClass()) {
-        		if ($sElementClass = $oElement->getAttribute('class')) {
-        			if (!preg_match('/(\s|^)' . preg_quote($sInputErrorClass, '/') . '(\s|$)/', $sElementClass)) $oElement->setAttribute('class', trim($sElementClass . ' ' . $sInputErrorClass));
-        		} else $oElement->setAttribute('class', $sInputErrorClass);
-        	}
+            $sRowClass .= ' has-error';
+            //Element have errors
+            if ($sInputErrorClass = $this->getInputErrorClass()) {
+                if ($sElementClass = $oElement->getAttribute('class')) {
+                    if (!preg_match('/(\s|^)' . preg_quote($sInputErrorClass, '/') . '(\s|$)/', $sElementClass)) $oElement->setAttribute('class', trim($sElementClass . ' ' . $sInputErrorClass));
+                } else $oElement->setAttribute('class', $sInputErrorClass);
+            }
         }
 
 
@@ -159,13 +159,13 @@ class TwbBundleFormRow extends \Zend\Form\View\Helper\FormRow
 
                     //Render errors
                     if ($this->renderErrors) {
-                    	$sElementContent .= $this->getElementErrorsHelper()->render($oElement);
+                        $sElementContent .= $this->getElementErrorsHelper()->render($oElement);
                     }
 
                     return $sElementContent;
 
                 case \TwbBundle\Form\View\Helper\TwbBundleForm::LAYOUT_HORIZONTAL:
-                    $sClass = 'col-lg-10';
+                    $sClass = 'controls form-group';
 
                     //Element without labels
                     if (!$sLabelContent) $sClass .= ' col-lg-offset-2';
@@ -174,7 +174,7 @@ class TwbBundleFormRow extends \Zend\Form\View\Helper\FormRow
 
                     //Render errors
                     if ($this->renderErrors) {
-                    	$sElementContent .= $this->getElementErrorsHelper()->render($oElement);
+                        $sElementContent .= $this->getElementErrorsHelper()->render($oElement);
                     }
 
                     return sprintf(
@@ -194,7 +194,7 @@ class TwbBundleFormRow extends \Zend\Form\View\Helper\FormRow
 
         //Render errors
         if ($this->renderErrors) {
-        	$sElementContent .= $this->getElementErrorsHelper()->render($oElement);
+            $sElementContent .= $this->getElementErrorsHelper()->render($oElement);
         }
 
         return $sElementContent;
